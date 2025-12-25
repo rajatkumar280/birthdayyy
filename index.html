@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(270deg,#12001a,#240033,#12001a);
+  background-size:600% 600%;
+  animation:bgMove 18s ease infinite;
+  color:#fff;
+}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* screens */
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  transition:transform .6s ease, opacity .6s ease;
+}
+.hide{
+  opacity:0;
+  transform:translateX(-100%);
+  pointer-events:none;
+}
+
+/* glass card */
+.card{
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:26px;
+  padding:34px;
+  max-width:420px;
+  box-shadow:0 30px 60px rgba(0,0,0,.4);
+}
+.card h1{
+  font-family:'Playfair Display',serif;
+  margin-bottom:12px;
+  font-size:2.2rem;
+}
+
+/* button */
+.btn{
+  margin-top:28px;
+  padding:14px 34px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(135deg,#ff5fa2,#ff9a9e);
+  color:#fff;
+  font-size:1rem;
+  font-weight:500;
+  box-shadow:0 15px 30px rgba(255,95,162,.45);
+}
+
+/* swipe hint */
+.swipe{
+  position:absolute;
+  bottom:30px;
+  opacity:.7;
+  animation:upDown 1.4s infinite;
+}
+@keyframes upDown{
+  50%{transform:translateY(-10px)}
+}
+
+/* hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  animation:float 7s linear infinite;
+  opacity:.8;
+}
+@keyframes float{
+  to{transform:translateY(-120vh)}
+}
+
+/* particles */
+.particle{
+  position:absolute;
+  width:6px;height:6px;
+  background:rgba(255,255,255,.6);
+  border-radius:50%;
+  animation:rise 8s linear infinite;
+}
+@keyframes rise{
+  to{transform:translateY(-120vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="s1">
+  <div class="card">
+    <h1>POV 💗</h1>
+    <p>It’s your favourite person’s birthday ✨</p>
+  </div>
+  <button class="btn" onclick="next(1)">Next ➜</button>
+  <div class="swipe">⬆ swipe</div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen hide" id="s2">
+  <div class="card">
+    <h1>Happy Birthday ✨</h1>
+    <p>
+      Aaj ka din sirf birthday nahi,<br>
+      aaj ek bahut khaas insaan ka din hai 💗
+    </p>
+  </div>
+  <button class="btn" onclick="next(2)">Continue ➜</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen hide" id="s3">
+  <div class="card">
+    <h1>Just One Thing 💌</h1>
+    <p>
+      Tumhari muskaan hi kaafi hai<br>
+      kisi ka din banaane ke liye ✨
+    </p>
+  </div>
+</div>
+
+<script>
+function next(n){
+  document.getElementById("s"+n).classList.add("hide");
+  document.getElementById("s"+(n+1)).classList.remove("hide");
+}
+
+/* hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=Math.random()*18+14+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},600);
+
+/* particles */
+setInterval(()=>{
+  const p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.bottom="-10px";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),8000);
+},400);
+</script>
+
+</body>
+    </html>
